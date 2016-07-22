@@ -19,8 +19,33 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    //log 工具
+    compile 'com.jakewharton.timber:timber:4.1.2'
+    //事件总线
+    compile 'de.greenrobot:eventbus:2.4.0'
+    //依赖注入
+    compile 'com.jakewharton:butterknife:8.2.1'
+    //数据库activeAndroid
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    //json解析
+    compile 'com.google.code.gson:gson:2.5'
+    //RxJava
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    //recycleView animation
+    compile 'jp.wasabeef:recyclerview-animators:2.2.0'
+    //讯飞语音
+    compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
+
 }

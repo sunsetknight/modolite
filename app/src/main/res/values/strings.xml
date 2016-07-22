@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">moduolite</string>
+    <string name="app_name">魔哆New</string>
+    <string name="toolbar_title">魔哆</string>
+
+    <!--录音按钮状态-->
+    <string name="str_record_normal">按住 说话</string>
+    <string name="str_record_recording">松开 结束</string>
+    <string name="str_record_want_cancel">松开手指 取消发送</string>
+    <string name="str_record_too_short">录音事件过短</string>
+
+
 </resources>
