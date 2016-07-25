@@ -1,5 +1,6 @@
 package com.mingko.moduolite.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -50,7 +51,6 @@ public class ModuoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_moduo, container, false);
         ButterKnife.bind(this, rootView);
         initView();
-
         //presenter
         mModuoPresenter = new ModuoPresenter(getContext(), this);
         return rootView;
@@ -58,7 +58,9 @@ public class ModuoFragment extends Fragment {
 
     private void initView() {
         //聊天列表
-        recycleChat.setLayoutManager(new LinearLayoutManager(getContext()));
+        Context context = getContext();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        recycleChat.setLayoutManager(linearLayoutManager);
         mAdapter = new ChatLvAdapter(getContext(), recycleChat);
         recycleChat.setAdapter(mAdapter);
         recycleChat.setItemAnimator(new LandingAnimator(new AccelerateDecelerateInterpolator()));

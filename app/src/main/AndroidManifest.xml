@@ -27,6 +27,7 @@
 
 
     <application
+        android:name="com.mingko.moduolite.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -52,7 +53,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.mingko.moduolite.activity.MainActivity">
+        <activity android:name="com.mingko.moduolite.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

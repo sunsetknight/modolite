@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--魔哆-->
-    <com.mingko.moduo.fragment.moduo.view.widget.ModuoView
-        android:id="@+id/id_moduo"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clickable="true" />
-
     <!--聊天刷新-->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/id_swipe_layout"
@@ -34,7 +26,7 @@
         android:layout_height="1dp"
         android:background="#cccccc" />
 
-    <com.mingko.moduo.fragment.moduo.view.widget.record.RecordButton
+    <com.mingko.moduolite.fragment.widget.record.view.widget.record.RecordButton
         android:id="@+id/id_btn_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -42,7 +42,7 @@ public class FileUtil {
     /**
      * 初始化魔哆sd卡路径   以及必要的文件路径
      */
-    public static void initModuoFolder() {
+    static {
         //二维码路径
         File qrCodePath = new File(MODUO_QRCODE_PATH);
         createDirectory(qrCodePath);
