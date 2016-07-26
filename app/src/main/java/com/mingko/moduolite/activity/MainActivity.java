@@ -12,7 +12,6 @@ import com.mingko.moduolite.fragment.ModuoFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         //actionbar
-        Timber.e("********** toolbar == null ? " + (toolbar == null));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle("魔哆");

@@ -19,10 +19,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //讯飞语音
-        SpeechUtility.createUtility(this, SpeechConstant.APPID + "=56a6efef");
+        //讯飞语音 APPID = 570e0846 (old version: 56a6efef)
+        SpeechUtility.createUtility(this, SpeechConstant.APPID + "=570e0846");
 
-        //初始化 log
+        //初始化 Log 日志工具 Timber
         Timber.plant(new Timber.DebugTree());
 
         //activeAndroid数据库
