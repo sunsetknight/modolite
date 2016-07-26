@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">魔哆New</string>
+    <string name="moduo">魔&#160;&#160;&#160;哆</string>
     <string name="toolbar_title">魔哆</string>
 
     <!--录音按钮状态-->
@@ -8,5 +9,9 @@
     <string name="str_record_want_cancel">松开手指 取消发送</string>
     <string name="str_record_too_short">录音事件过短</string>
 
+    <string name="server">服务器</string>
+    <string name="port">端 口</string>
+    <string name="save_connect">保&#160;&#160;&#160;&#160;存</string>
+    <string name="delete_connect">删&#160;&#160;&#160;&#160;除</string>
 
 </resources>
