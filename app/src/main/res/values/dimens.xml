@@ -10,7 +10,7 @@
 
     <dimen name="setting_connect_title_moduo">40dp</dimen>
     <dimen name="setting_connect_item_text">24dp</dimen>
-    <dimen name="setting_connect_item_width">50dp</dimen>
+    <dimen name="setting_connect_item_width">70dp</dimen>
     <dimen name="setting_connect_button_width">250dp</dimen>
     <dimen name="setting_connect_button_text">26dp</dimen>
 

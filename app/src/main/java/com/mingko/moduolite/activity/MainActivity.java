@@ -1,14 +1,19 @@
 package com.mingko.moduolite.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mingko.moduolite.R;
 import com.mingko.moduolite.fragment.ModuoFragment;
+import com.mingko.moduolite.fragment.SettingConnectFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private ModuoFragment moduoFragment;
+    private SettingConnectFragment settingConnectFragment;
+
+    private FragmentState currentFragmentState = FragmentState.MODUO_FRAGMENT;
+
+    private enum FragmentState{
+        MODUO_FRAGMENT,
+        SETTING_CONNECT_FRAGMENT
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +53,30 @@ public class MainActivity extends AppCompatActivity {
         //actionbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setTitle("魔哆");
+
     }
+
+/*    @OnClick(R.id.id_ib_setting_connect)
+    public void settingClick(View v){
+        switch (v.getId()){
+            case R.id.id_ib_setting_connect:
+                switchFragment(moduoFragment, settingConnectFragment);
+
+        }
+    }*/
 
     private void initFragment() {
         fragmentManager = getSupportFragmentManager();
         moduoFragment = new ModuoFragment();
+        settingConnectFragment = new SettingConnectFragment();
         //初始化为moduoFragment
         fragmentManager.beginTransaction()
-                .replace(R.id.id_fragment_container, moduoFragment)
+                .add(R.id.id_fragment_container, moduoFragment)
+                .add(R.id.id_fragment_container, settingConnectFragment)
+                .hide(settingConnectFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
 
@@ -68,4 +96,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                switchFragment(settingConnectFragment, moduoFragment);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                break;
+            case R.id.id_menu_setting_connect:
+                switchFragment(moduoFragment, settingConnectFragment);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void switchFragment(Fragment currentFragment, Fragment toFragment){
+        fragmentManager.beginTransaction()
+                .hide(currentFragment)
+                .show(toFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
 }

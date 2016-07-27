@@ -39,11 +39,13 @@
             android:layout_width="@dimen/setting_connect_item_width"
             android:layout_height="match_parent"
             android:text="@string/server"
+            android:textSize="22sp"
             android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/id_et_server"/>
 
     </LinearLayout>
 
@@ -57,17 +59,20 @@
             android:layout_width="@dimen/setting_connect_item_width"
             android:layout_height="match_parent"
             android:text="@string/port"
+            android:textSize="22sp"
             android:gravity="center"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/id_et_port"/>
 
     </LinearLayout>
 
     <Button
         android:layout_width="@dimen/setting_connect_button_width"
         android:layout_height="wrap_content"
+        android:id="@+id/id_btn_save"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:text="@string/save_connect"
@@ -78,6 +83,7 @@
     <Button
         android:layout_width="@dimen/setting_connect_button_width"
         android:layout_height="wrap_content"
+        android:id="@+id/id_btn_delete"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:text="@string/delete_connect"
