@@ -20,9 +20,13 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String IP = "192.168.2.15";
+    public static final int PORT = 10001;
+
     //点击两次返回按钮退出程序 单位：毫秒
     private static final long EXIT_TIME = 1500;
     private long exitTime = 0;
+    private boolean showMenu = true;
 
     @BindView(R.id.id_tb)
     Toolbar toolbar;
@@ -30,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private ModuoFragment moduoFragment;
     private SettingConnectFragment settingConnectFragment;
-
-    private FragmentState currentFragmentState = FragmentState.MODUO_FRAGMENT;
-
-    private enum FragmentState{
-        MODUO_FRAGMENT,
-        SETTING_CONNECT_FRAGMENT
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-/*    @OnClick(R.id.id_ib_setting_connect)
-    public void settingClick(View v){
-        switch (v.getId()){
-            case R.id.id_ib_setting_connect:
-                switchFragment(moduoFragment, settingConnectFragment);
-
-        }
-    }*/
-
     private void initFragment() {
         fragmentManager = getSupportFragmentManager();
         moduoFragment = new ModuoFragment();
@@ -78,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 .hide(settingConnectFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
+        moduoFragment.initClientThread(IP, PORT);
     }
 
     //设置标题
@@ -98,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        if( showMenu ){
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -108,10 +99,14 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 switchFragment(settingConnectFragment, moduoFragment);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                showMenu = true;
+                invalidateOptionsMenu();
                 break;
             case R.id.id_menu_setting_connect:
                 switchFragment(moduoFragment, settingConnectFragment);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                showMenu = false;
+                invalidateOptionsMenu();
                 break;
         }
         return super.onOptionsItemSelected(item);

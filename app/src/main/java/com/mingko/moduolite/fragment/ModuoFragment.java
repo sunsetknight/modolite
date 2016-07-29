@@ -2,6 +2,8 @@ package com.mingko.moduolite.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,6 +16,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import com.mingko.moduolite.R;
+import com.mingko.moduolite.control.TCPClient;
 import com.mingko.moduolite.fragment.widget.record.presenter.ModuoPresenter;
 import com.mingko.moduolite.fragment.widget.record.view.adapter.ChatLvAdapter;
 import com.mingko.moduolite.fragment.widget.record.view.adapter.MsgBean;
@@ -23,7 +26,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
+import timber.log.Timber;
 
 /**
  * 魔哆主界面
@@ -33,6 +38,9 @@ public class ModuoFragment extends Fragment {
 
     //Presenter
     private ModuoPresenter mModuoPresenter;
+    private static Handler handler;
+    // 定义与服务器通信的子线程
+    private static TCPClient clientThread;
 
     //录音按钮
     @BindView(R.id.id_btn_record)
@@ -44,6 +52,24 @@ public class ModuoFragment extends Fragment {
     @BindView(R.id.id_recycle_chat)
     RecyclerView recycleChat;
     ChatLvAdapter mAdapter;
+
+    /**
+     * 初始化客户端连接线程
+     * 收到来自服务端云魔哆的数据后原文显示
+     */
+    public void initClientThread(String ip, int port) {
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                if(msg.what == 0x123){
+                    Timber.e(msg.obj.toString());
+                    EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, msg.obj.toString()));
+                }
+            }
+        };
+        clientThread = new TCPClient(ip, port, handler);
+        new Thread(clientThread).start();
+    }
 
     @Nullable
     @Override
@@ -58,7 +84,7 @@ public class ModuoFragment extends Fragment {
 
     private void initView() {
         //聊天列表
-        Context context = getContext();
+        final Context context = getContext();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         recycleChat.setLayoutManager(linearLayoutManager);
         mAdapter = new ChatLvAdapter(getContext(), recycleChat);
@@ -97,5 +123,15 @@ public class ModuoFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         mModuoPresenter.destroy();
+    }
+
+    public TCPClient getClientThread() {
+        return clientThread;
+    }
+
+    public static void resetClientThread(String ip, int port) {
+        clientThread.endLife();
+        clientThread = new TCPClient(ip, port, handler);
+        new Thread(clientThread).start();
     }
 }

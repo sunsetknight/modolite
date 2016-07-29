@@ -31,15 +31,15 @@ public class NetStateReceiver extends BroadcastReceiver {
         switch (networkState) {
             case NetUtil.NETWORK_NONE:
                 EventBus.getDefault().post(new NetworkStateChangeEvent(NetworkStateChangeEvent.NetworkState.NONE));
-                Timber.e("网络没了");
+                Timber.e("当前无网络连接");
                 break;
             case NetUtil.NETWORK_MOBILE:
                 EventBus.getDefault().post(new NetworkStateChangeEvent(NetworkStateChangeEvent.NetworkState.MOBILE));
-                Timber.e("在用手机流量");
+                Timber.e("当前使用 手机流量");
                 break;
             case NetUtil.NETWORK_WIFI:
                 EventBus.getDefault().post(new NetworkStateChangeEvent(NetworkStateChangeEvent.NetworkState.WIFI));
-                Timber.e("在用WIFI");
+                Timber.e("当前使用 WIFI 网络");
                 break;
         }
     }

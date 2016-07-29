@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.mingko.moduolite.R;
 
@@ -46,9 +45,9 @@ public class SettingConnectFragment extends Fragment {
 
     @OnClick(R.id.id_btn_save)
     public void setBtnSave(){
-        String s = etServer.getText().toString();
-        String p = etPort.getText().toString();
-        Toast.makeText(this.getActivity(), s + ":" + p, Toast.LENGTH_SHORT).show();
+        String ip = etServer.getText().toString();
+        int port = Integer.parseInt(etPort.getText().toString());
+        ModuoFragment.resetClientThread(ip , port);
     }
 
     @OnClick(R.id.id_btn_delete)
