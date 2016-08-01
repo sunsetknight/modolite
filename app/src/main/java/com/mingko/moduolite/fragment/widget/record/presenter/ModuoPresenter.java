@@ -2,7 +2,6 @@ package com.mingko.moduolite.fragment.widget.record.presenter;
 
 import android.content.Context;
 import android.os.Message;
-import android.widget.Toast;
 
 import com.mingko.moduolite.fragment.ModuoFragment;
 import com.mingko.moduolite.fragment.widget.record.model.ModuoModel;
@@ -16,7 +15,6 @@ import de.greenrobot.event.EventBus;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * presenter
@@ -68,13 +66,13 @@ public class ModuoPresenter {
         Message msg = new Message();
         msg.what = 0x345;
         msg.obj = event.getJsonResult();
-        try{
+        //try{
             mModuoFragmentView.getClientThread().revHandler.sendMessage(msg);
-        } catch (Exception e){
+        /*} catch (Exception e){
             e.printStackTrace();
             Timber.e("连接服务器失败。");
             EventBus.getDefault().post(new SpeechUnderstandEvent(true, "服务器未连接，请重新设置。"));
-        }
+        }*/
     }
 
     public void destroy() {
