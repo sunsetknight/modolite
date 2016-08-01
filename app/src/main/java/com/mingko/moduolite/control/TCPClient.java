@@ -28,10 +28,10 @@ public class TCPClient implements Runnable {
     public static final int MESSAGE_SEND = 1;
     public static final int MESSAGE_RECEIVED = 2;
 
-    /** 首次连接的确认文字 */
-    private static final String CONNECT_VERIFY = "服务器连接成功";
     /** 监听服务器端的数据时最长等待时间 */
     private static final int SOCKET_TIMEOUT = 1 * 60 * 1000;
+    /** 首次连接的确认文字 */
+    private static String connectVerify = "与服务器连接成功\r\n";
 
     public String ip;
     public int port;
@@ -142,7 +142,8 @@ public class TCPClient implements Runnable {
      */
     private void firstConnect() {
         try {
-            os.write(CONNECT_VERIFY.getBytes("utf-8"));
+            connectVerify = "与服务器" + ip + ":" +  port + "连接成功\r\n";
+            os.write(connectVerify.getBytes("utf-8"));
             Timber.e("已发送首次握手信息");
         } catch (IOException e) {
             Timber.e("首次握手失败");
