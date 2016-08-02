@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.mingko.moduolite.R;
+import com.mingko.moduolite.activity.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +42,8 @@ public class SettingConnectFragment extends Fragment {
     }
 
     private void initView() {
+        etServer.setText(MainActivity.IP);
+        etPort.setText(String.valueOf(MainActivity.PORT));
     }
 
     @OnClick(R.id.id_btn_save)

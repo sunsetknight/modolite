@@ -3,6 +3,7 @@ package com.mingko.moduolite.fragment.widget.record.presenter;
 import android.content.Context;
 import android.os.Message;
 
+import com.mingko.moduolite.control.TCPClient;
 import com.mingko.moduolite.fragment.ModuoFragment;
 import com.mingko.moduolite.fragment.widget.record.model.ModuoModel;
 import com.mingko.moduolite.fragment.widget.record.model.event.SpeechUnderstandEvent;
@@ -64,15 +65,9 @@ public class ModuoPresenter {
     //语义理解回调
     public void onEventMainThread(SpeechUnderstandEvent event) {
         Message msg = new Message();
-        msg.what = 0x345;
+        msg.what = TCPClient.MESSAGE_SEND;
         msg.obj = event.getJsonResult();
-        //try{
-            mModuoFragmentView.getClientThread().revHandler.sendMessage(msg);
-        /*} catch (Exception e){
-            e.printStackTrace();
-            Timber.e("连接服务器失败。");
-            EventBus.getDefault().post(new SpeechUnderstandEvent(true, "服务器未连接，请重新设置。"));
-        }*/
+        mModuoFragmentView.getClientThread().revHandler.sendMessage(msg);
     }
 
     public void destroy() {

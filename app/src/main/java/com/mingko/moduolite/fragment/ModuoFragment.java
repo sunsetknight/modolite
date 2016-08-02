@@ -61,7 +61,7 @@ public class ModuoFragment extends Fragment {
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                if(msg.what == 0x123){
+                if(msg.what == TCPClient.MESSAGE_RECEIVED){
                     Timber.e(msg.obj.toString());
                     EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, msg.obj.toString()));
                 }
@@ -130,8 +130,12 @@ public class ModuoFragment extends Fragment {
     }
 
     public static void resetClientThread(String ip, int port) {
-        clientThread.endLife();
+        endClientThread();
         clientThread = new TCPClient(ip, port, handler);
         new Thread(clientThread).start();
+    }
+
+    public static void endClientThread() {
+        clientThread.endLife();
     }
 }
