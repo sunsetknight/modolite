@@ -6,8 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +18,12 @@ import com.mingko.moduolite.fragment.SettingConnectFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     /** 默认IP */
-    public static final String IP = "192.168.2.15";
+    public static String IP = "192.168.2.73" ;
     /** 默认端口 */
     public static final int PORT = 10001;
 
@@ -29,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private static final long EXIT_TIME = 1500;
     /** 记录当前点击退出的时间 单位：毫秒 */
     private long exitTime = 0;
-    /** 是否显示Actionbar 右上角的3个点菜单 */
-    private boolean showMenu = true;
 
-    @BindView(R.id.id_tb)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.iv_tb_back)
+    ImageButton tbBack;
+    @BindView(R.id.iv_tb_setting)
+    ImageButton tbSetting;
 
     private FragmentManager fragmentManager;
     private ModuoFragment moduoFragment;
@@ -59,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         //actionbar
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setTitle("魔哆");
 
     }
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 .hide(settingConnectFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
-        moduoFragment.initClientThread(IP, PORT);
     }
 
     /**
@@ -86,16 +87,8 @@ public class MainActivity extends AppCompatActivity {
      * @param strTitle 需要显示的内容
      */
     private void setTitle(String strTitle) {
-        TextView tv = (TextView) toolbar.findViewById(R.id.id_tb_title);
+        TextView tv = (TextView) toolbar.findViewById(R.id.tv_tb_title);
         tv.setText(strTitle);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if( showMenu ){
-            getMenuInflater().inflate(R.menu.menu_main, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -123,17 +116,15 @@ public class MainActivity extends AppCompatActivity {
             case MODUO_FRAGMENT:
                 fromFragment = moduoFragment;
                 toFragment = settingConnectFragment;
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                showMenu = false;
-                invalidateOptionsMenu();
+                tbBack.setVisibility(View.VISIBLE);
+                tbSetting.setVisibility(View.INVISIBLE);
                 currentFragment = FragmentState.SETTING_CONNECT_FRAGMENT;
                 break;
             case SETTING_CONNECT_FRAGMENT:
                 fromFragment = settingConnectFragment;
                 toFragment = moduoFragment;
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                showMenu = true;
-                invalidateOptionsMenu();
+                tbBack.setVisibility(View.INVISIBLE);
+                tbSetting.setVisibility(View.VISIBLE);
                 currentFragment = FragmentState.MODUO_FRAGMENT;
                 break;
         }
@@ -143,6 +134,16 @@ public class MainActivity extends AppCompatActivity {
                 .show(toFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
+    }
+
+    @OnClick(R.id.iv_tb_setting)
+    public void onSettingClick(){
+        switchFragment();
+    }
+
+    @OnClick(R.id.iv_tb_back)
+    public void onBackClick(){
+        switchFragment();
     }
 
     /**

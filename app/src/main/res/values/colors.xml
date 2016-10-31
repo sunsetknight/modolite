@@ -9,7 +9,6 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="button_orange">#FFA300</color>
-    <color name="button_green">#10CE6E</color>
+    <color name="tb_pressed_grey">#66FFFFFF</color>
 
 </resources>

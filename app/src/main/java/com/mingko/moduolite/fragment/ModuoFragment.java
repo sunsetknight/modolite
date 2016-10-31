@@ -16,11 +16,12 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import com.mingko.moduolite.R;
+import com.mingko.moduolite.activity.MainActivity;
 import com.mingko.moduolite.control.TCPClient;
-import com.mingko.moduolite.fragment.widget.record.presenter.ModuoPresenter;
-import com.mingko.moduolite.fragment.widget.record.view.adapter.ChatLvAdapter;
-import com.mingko.moduolite.fragment.widget.record.view.adapter.MsgBean;
-import com.mingko.moduolite.fragment.widget.record.view.widget.record.RecordButton;
+import com.mingko.moduolite.fragment.audiorecord.presenter.ModuoPresenter;
+import com.mingko.moduolite.fragment.audiorecord.view.adapter.ChatLvAdapter;
+import com.mingko.moduolite.fragment.audiorecord.view.adapter.MsgBean;
+import com.mingko.moduolite.fragment.audiorecord.view.widget.record.RecordButton;
 
 import java.util.List;
 
@@ -57,17 +58,17 @@ public class ModuoFragment extends Fragment {
      * 初始化客户端连接线程
      * 收到来自服务端云魔哆的数据后原文显示
      */
-    public void initClientThread(String ip, int port) {
+    public void initClientThread() {
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 if(msg.what == TCPClient.MESSAGE_RECEIVED){
                     Timber.e(msg.obj.toString());
-                    EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, msg.obj.toString()));
+                    EventBus.getDefault().post(MsgBean.createModoTextAnswer(msg.obj.toString()));
                 }
             }
         };
-        clientThread = new TCPClient(ip, port, handler);
+        clientThread = new TCPClient(MainActivity.IP, MainActivity.PORT, handler);
         new Thread(clientThread).start();
     }
 
@@ -77,7 +78,7 @@ public class ModuoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_moduo, container, false);
         ButterKnife.bind(this, rootView);
         initView();
-        //presenter
+        initClientThread();
         mModuoPresenter = new ModuoPresenter(getContext(), this);
         return rootView;
     }

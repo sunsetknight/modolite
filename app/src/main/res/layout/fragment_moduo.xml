@@ -25,7 +25,7 @@
         android:layout_height="1dp"
         android:background="#cccccc" />
 
-    <com.mingko.moduolite.fragment.widget.record.view.widget.record.RecordButton
+    <com.mingko.moduolite.fragment.audiorecord.view.widget.record.RecordButton
         android:id="@+id/id_btn_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -129,4 +129,21 @@ public class NetUtil {
         }
         return NETWORK_NONE;
     }
+
+    /**
+     * wifi环境下，获取当前IP地址
+     */
+    public static String getIpAddress(Context context){
+        String ip = "";
+        if (context != null) {
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            int intIp = wifiInfo.getIpAddress();
+            ip = (intIp & 0xFF) + "." +
+                    ((intIp >> 8) & 0xFF) + "." +
+                    ((intIp >> 16) & 0xFF) + "." +
+                    ((intIp >> 24) & 0xFF);
+        }
+        return ip;
+    }
 }

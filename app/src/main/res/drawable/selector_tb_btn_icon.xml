@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--按下背景为灰色透明图层-->
+    <item android:drawable="@color/tb_pressed_grey" android:state_pressed="true" />
+
+    <!--正常状态-->
+    <item android:drawable="@color/transparent" />
+
+</selector>

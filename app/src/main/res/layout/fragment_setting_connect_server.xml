@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_margin="20dp"
     >
 
@@ -33,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_margin="10dp">
 
         <TextView
             android:layout_width="@dimen/setting_connect_item_width"
@@ -53,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_margin="10dp">
 
         <TextView
             android:layout_width="@dimen/setting_connect_item_width"
@@ -70,25 +71,15 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="@dimen/setting_connect_button_width"
-        android:layout_height="wrap_content"
+        style="@style/settingBtn"
         android:id="@+id/id_btn_save"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
         android:text="@string/save_connect"
-        android:textSize="@dimen/setting_connect_button_text"
-        android:background="@color/button_orange"
-        android:layout_margin="20dp"/>
+        android:background="@drawable/selector_btn_yellow" />
 
     <Button
-        android:layout_width="@dimen/setting_connect_button_width"
-        android:layout_height="wrap_content"
+        style="@style/settingBtn"
         android:id="@+id/id_btn_delete"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
         android:text="@string/delete_connect"
-        android:textSize="@dimen/setting_connect_button_text"
-        android:background="@color/button_green"
-        android:layout_margin="20dp"/>
+        android:background="@drawable/selector_btn_blue" />
 
 </LinearLayout>

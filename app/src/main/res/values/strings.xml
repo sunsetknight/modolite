@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">魔哆New</string>
+    <string name="app_name">虚拟魔哆</string>
     <string name="moduo">魔&#160;&#160;&#160;哆</string>
     <string name="toolbar_title">魔哆</string>
 
@@ -11,7 +11,7 @@
 
     <string name="server">服务器</string>
     <string name="port">端&#160;&#160;&#160;&#160;口</string>
-    <string name="save_connect">保&#160;&#160;&#160;&#160;存</string>
-    <string name="delete_connect">删&#160;&#160;&#160;&#160;除</string>
+    <string name="save_connect">连&#160;&#160;&#160;&#160;接</string>
+    <string name="delete_connect">重&#160;&#160;&#160;&#160;置</string>
 
 </resources>

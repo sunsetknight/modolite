@@ -51,12 +51,13 @@ public class SettingConnectFragment extends Fragment {
         String ip = etServer.getText().toString();
         int port = Integer.parseInt(etPort.getText().toString());
         ModuoFragment.resetClientThread(ip , port);
+        getActivity().onBackPressed();
     }
 
     @OnClick(R.id.id_btn_delete)
     public void setBtnDelete(){
-        etServer.setText("");
-        etPort.setText("");
+        etServer.setText("192.168.2.");
+        etPort.setText("10001");
     }
 
     @Override

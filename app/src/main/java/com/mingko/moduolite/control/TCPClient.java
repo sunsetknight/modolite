@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.mingko.moduolite.fragment.widget.record.view.adapter.MsgBean;
+import com.mingko.moduolite.fragment.audiorecord.view.adapter.MsgBean;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class TCPClient implements Runnable {
     /** 监听服务器端的数据时最长等待时间 */
     private static final int SOCKET_TIMEOUT = 1 * 60 * 1000;
     /** 首次连接的确认文字 */
-    private static String connectVerify = "与服务器连接成功\r\n";
+    private static String connectVerify = "与服务器连接成功";
 
     public String ip;
     public int port;
@@ -58,18 +58,15 @@ public class TCPClient implements Runnable {
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             os = socket.getOutputStream();
         } catch ( UnknownHostException e) {
-            Timber.e("未能识别的服务器地址");
-            EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, "未能识别的服务器地址，请重新设置IP"));
+            EventBus.getDefault().post(MsgBean.createModoTextAnswer("未能识别的服务器地址，请重新设置IP"));
             endLife();
             return;
         } catch ( ConnectException e){
-            Timber.e("未能连接到指定服务器");
-            EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, "未能连接到指定服务器，请重新设置连接"));
+            EventBus.getDefault().post(MsgBean.createModoTextAnswer("与服务器 " + ip + ": " + port + "连接失败，请重新设置连接"));
             endLife();
             return;
         } catch ( IOException e) {
-            Timber.e("服务器连接失败");
-            EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, "服务器连接失败，请确认服务器是否开启。"));
+            EventBus.getDefault().post(MsgBean.createModoTextAnswer("服务器连接失败，请确认服务器是否开启。"));
             endLife();
             return;
         }
@@ -97,7 +94,7 @@ public class TCPClient implements Runnable {
                     } catch (IOException e) {
                         if( life ){
                             Timber.e("与服务器断开连接");
-                            EventBus.getDefault().post(MsgBean.getInstance(MsgBean.TYPE_MODUO_TEXT, MsgBean.STATE_SENT, "与服务器 " + ip + ": " + port + " 断开连接 "));
+                            EventBus.getDefault().post(MsgBean.createModoTextAnswer("与服务器 " + ip + ": " + port + " 断开连接 "));
                         }
                         e.printStackTrace();
                     }
