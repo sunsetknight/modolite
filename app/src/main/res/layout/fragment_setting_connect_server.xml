@@ -22,9 +22,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/moduo"
+            android:hint="@string/modo"
             android:textColorHint="@color/black"
-            android:textSize="@dimen/setting_connect_title_moduo"
+            android:textSize="@dimen/setting_connect_title_modo"
             android:gravity="center"
             android:layout_gravity="center_vertical"/>
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mingko.modolite.view.InterceptTouchWebView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_wv_chat_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_fragment"
+    android:gravity="center_vertical"
+    android:scrollbars="none"
+    />

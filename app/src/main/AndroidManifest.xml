@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mingko.moduolite">
+    package="com.mingko.modolite">
 
     <!--讯飞权限-->
     <!-- TCP 连接也需要该权限 -->
@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
-        android:name="com.mingko.moduolite.App"
+        android:name="com.mingko.modolite.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -42,17 +42,17 @@
             android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.mingko.moduolite.fragment.widget.record.view.adapter.MsgBean" />
+            android:value="com.mingko.modolite.fragment.widget.record.view.adapter.MsgBean" />
         <!--数据库 activeAndroid-->
 
         <!-- 网络监听 -->
-        <receiver android:name="com.mingko.moduolite.control.NetStateReceiver">
+        <receiver android:name="com.mingko.modolite.control.receiver.NetStateReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.mingko.moduolite.activity.MainActivity"
+        <activity android:name="com.mingko.modolite.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

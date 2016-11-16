@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">虚拟魔哆</string>
-    <string name="moduo">魔&#160;&#160;&#160;哆</string>
+    <string name="modo">魔&#160;&#160;&#160;哆</string>
     <string name="toolbar_title">魔哆</string>
 
     <!--录音按钮状态-->
